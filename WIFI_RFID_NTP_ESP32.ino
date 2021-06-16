@@ -25,8 +25,8 @@ VCC  -------> 3.3V
 #define SS_PIN 15
 #define RST_PIN 27
 //Wifi
-const char* ssid     = "Padhyegurjar";
-const char* password = "mncb8tbbt8";
+const char* ssid     = "**************";
+const char* password = "**************";
 /* ______________________________________Declarations and Variables______________________________________ */
 //RFID
 MFRC522 rfid(SS_PIN, RST_PIN); // Instance of the class
