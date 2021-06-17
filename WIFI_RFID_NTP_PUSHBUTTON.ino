@@ -31,8 +31,8 @@ Pushbutton -> 22
 #define SS_PIN 15
 #define RST_PIN 27
 //Wifi
-const char* ssid     = "********";
-const char* password = "********";
+const char* ssid     = "Padhyegurjar";
+const char* password = "mncb8tbbt8";
 //Button
 #define buttonPin 22
 /* ______________________________________Declarations and Variables______________________________________ */
@@ -45,11 +45,12 @@ WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP); 
 long int loginTime = 0;
 long int logoutTime = 0;
+String RFIDCode = "";
 double duration;
 String timeStamp, dateStamp, dayStamp;
 //Button
 int buttonState; //Logout will be initiated if button state is HIGH
-int statuss = 0;
+int statusFlag = 0;
 /* ______________________________________Setup______________________________________ */
 void setup() {
   Serial.begin(115200);
@@ -74,31 +75,58 @@ void setup() {
   }
   //timeClient.begin();
 }
-
+/* ______________________________________Loop______________________________________ */
 void loop() {
-if (rfid.PICC_IsNewCardPresent() && rfid.PICC_ReadCardSerial()){
- for (byte i = 0; i < 4; i++) {
-      uid[i] = rfid.uid.uidByte[i];
+ startSession();
+ if(statusFlag==1){
+    readSensors();
  }
- printHex(rfid.uid.uidByte, rfid.uid.size);
- Serial.println();
- rfid.PICC_HaltA();
- rfid.PCD_StopCrypto1();
- timeClient.update();
- loginTime = timeClient.getEpochTime() + (19800); //Set offset wrt your Timezone - 5 hours 30 minutes = 19800s (India is GMT+5:30)
- getDetailedTimeStamp(loginTime);
- Serial.print("Date: "); Serial.println(dateStamp);
- Serial.print("Day: "); Serial.println(dayStamp);
- Serial.print("Time: "); Serial.println(timeStamp);
- rfid.PCD_AntennaOff();
- Serial.println("Antenna Off "); //Successfully logged in
- statuss=1; //This indicates that an RFID card has been logged in. The sensors will be read as long as statuss=1
+ else {
+    return;
+ }
 }
- if(statuss){
+
+/* ______________________________________Functions______________________________________ */
+//Read and print RFID Tag, Login
+void startSession(){
+  //Check for an RFID Card
+  if (rfid.PICC_IsNewCardPresent() && rfid.PICC_ReadCardSerial()){
+    for (byte i = 0; i < 4; i++) {
+        uid[i] = rfid.uid.uidByte[i];
+    }
+    //Print RFID card
+    for (byte j = 0; j < rfid.uid.size; j++) 
+     {
+       RFIDCode.concat(String(rfid.uid.uidByte[j] < 0x10 ? " 0" : " "));
+       RFIDCode.concat(String(rfid.uid.uidByte[j], HEX));
+     }
+    //Print RFID Tag
+    RFIDCode.toUpperCase();
+    RFIDCode=String(RFIDCode.substring(1));
+    Serial.println(RFIDCode);
+    rfid.PICC_HaltA();
+    rfid.PCD_StopCrypto1();
+    timeClient.update();
+    loginTime = timeClient.getEpochTime() + (19800); //Set offset wrt your Timezone - 5 hours 30 minutes = 19800s (India is GMT+5:30)
+    getDetailedTimeStamp(loginTime);
+    Serial.print("Date: "); Serial.println(dateStamp);
+    Serial.print("Day: "); Serial.println(dayStamp);
+    Serial.print("Time: "); Serial.println(timeStamp);
+    rfid.PCD_AntennaOff();
+    Serial.println("Antenna Off "); //Successfully logged in
+    statusFlag=1; //This indicates that an RFID card has been logged in. The sensors will be read as long as statusFlag=1
+ }
+ else{
+  //Serial.println("No Card Present");
+  //delay(5000);
+ }
+}
+//Read Sensors, initiate logout if Button is pressed
+void readSensors(){
   while(1){
     buttonState = digitalRead(buttonPin);
     if(buttonState==HIGH){ //Logout
-      statuss=0;
+      statusFlag=0;
       timeClient.update();
       logoutTime = timeClient.getEpochTime() + (19800); //5 hours 30 minutes = 19800s (India is GMT+5:30)
       getDetailedTimeStamp(logoutTime);
@@ -107,18 +135,16 @@ if (rfid.PICC_IsNewCardPresent() && rfid.PICC_ReadCardSerial()){
       Serial.print(duration);
       Serial.println(" seconds.");
       rfid.PCD_AntennaOn();
+      RFIDCode = "";
       Serial.println("Antenna is on");
       break;
     }
-  }
- }
+  }  
 }
-
-/* ______________________________________Functions______________________________________ */
 //Function to convert epoch time into a readable format
 void getDetailedTimeStamp(int logs) {
-  timeStamp = String(hour(logs)) + ":" + String(minute(logs)) + ":" + String(second(logs));
-  dateStamp = String(day(logs))+ "-" + String(month(logs)) + "-" + String(year(logs));
+  timeStamp = ((hour(logs)<10)?("0"+String(hour(logs))):(String(hour(logs)))) + ":" + ((minute(logs)<10)?("0"+String(minute(logs))):(String(minute(logs)))) + ":" + ((second(logs)<10)?("0"+String(second(logs))):(String(second(logs))));
+  dateStamp = ((day(logs)<10)?("0"+String(day(logs))):(String(day(logs))))+ "-" + ((month(logs)<10)?("0"+String(month(logs))):(String(month(logs)))) + "-" + String(year(logs));
   switch(weekday(logs))
   {
     case 1:  dayStamp = "Sunday"; break;
@@ -128,13 +154,6 @@ void getDetailedTimeStamp(int logs) {
     case 5:  dayStamp = "Thursday"; break;
     case 6:  dayStamp = "Friday"; break;
     default: dayStamp = "Saturday";
-  }
-}
-
-void printHex(byte *buffer, byte bufferSize) {
-  for (byte i = 0; i < bufferSize; i++) {
-    Serial.print(buffer[i] < 0x10 ? " 0" : " ");
-    Serial.print(buffer[i], HEX);
   }
 }
 //https://www.teachmemicro.com/arduino-rfid-rc522-tutorial/
