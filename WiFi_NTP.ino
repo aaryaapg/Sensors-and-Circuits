@@ -58,8 +58,8 @@ void loop()
 /* ______________________________________Functions______________________________________ */
 //Function to convert epoch time into a readable format
 void getDetailedTimeStamp(int logs) {
-  timeStamp = String(hour(logs)) + ":" + String(minute(logs)) + ":" + String(second(logs));
-  dateStamp = String(day(logs))+ "-" + String(month(logs)) + "-" + String(year(logs));
+  timeStamp = ((hour(logs)<10)?("0"+String(hour(logs))):(String(hour(logs)))) + ":" + ((minute(logs)<10)?("0"+String(minute(logs))):(String(minute(logs)))) + ":" + ((second(logs)<10)?("0"+String(second(logs))):(String(second(logs))));
+  dateStamp = ((day(logs)<10)?("0"+String(day(logs))):(String(day(logs))))+ "-" + ((month(logs)<10)?("0"+String(month(logs))):(String(month(logs)))) + "-" + String(year(logs));
   switch(weekday(logs))
   {
     case 1:  dayStamp = "Sunday"; break;
