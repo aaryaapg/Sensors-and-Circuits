@@ -13,6 +13,7 @@
  * Blue    -------> 14
  * 
  * Button  -------> 15 (via 120 Ohm R) of ESP32
+ * Connection of the button has been done this way: https://www.arduino.cc/en/tutorial/pushbutton
  */
 
 /* ______________________________________Macros______________________________________ */
