@@ -7,3 +7,7 @@ Shows RFID Tag, Date, Day and Time
 
 ## WIFI_RFID_NTP_PUSHBUTTON
 ![PushButton for Logout Procedure](https://user-images.githubusercontent.com/61982410/122249597-9c005700-cee6-11eb-9224-aab1b9ce17f4.jpg)
+
+## PushButton Connection
+**State = Low when pressed, HIGH by default**
+Check this out: https://www.arduino.cc/en/tutorial/pushbutton
