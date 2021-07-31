@@ -9,5 +9,5 @@ Shows RFID Tag, Date, Day and Time
 ![PushButton for Logout Procedure](https://user-images.githubusercontent.com/61982410/122249597-9c005700-cee6-11eb-9224-aab1b9ce17f4.jpg)
 
 ## PushButton Connection
-**State = Low when pressed, HIGH by default**
 Check this out: https://www.arduino.cc/en/tutorial/pushbutton
+![IMG_20210731_201040796](https://user-images.githubusercontent.com/61982410/127743559-194fbba3-8b41-4764-a56f-e6f308deda12.jpg)
