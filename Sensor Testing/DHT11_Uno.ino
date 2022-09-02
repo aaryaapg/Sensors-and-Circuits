@@ -1,8 +1,7 @@
 /*
-Connections
 DHT11   Arduino Uno
 VCC ---> 5V
-Data --> 12
+Data --> 4
 GND ---> GND
 */
 
@@ -13,13 +12,12 @@ GND ---> GND
 #include <DHT_U.h>      // DHT11 temperature and humidity sensor Library
 
 /* _______________________________________Macros________________________________________ */
-#define DHTPIN 12
+#define DHTPIN 4
 #define DHTTYPE DHT11
 
 /* _____________________________Declarations_and_Variables______________________________ */
 DHT dht = DHT(DHTPIN, DHTTYPE);   // DHT dht = DHT(DHTPIN,Sensor_type), "dht" is the name of the sensor (variable)
-int h, tc;
-float tf, hif, hic;
+float h, tc, tf, hif, hic;
 
 /* ________________________________________Setup________________________________________ */
 void setup() {
