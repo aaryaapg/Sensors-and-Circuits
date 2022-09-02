@@ -1,5 +1,29 @@
 # Sensors-and-Circuits
 A collection of Arduino Sketches that'll help understand the basic properties and functions of various sensors and peripherals.
+## Template
+```
+/*
+Connections
+Name          Arduino Uno   ESP32   ESP8266   Pro Mini
+---> 
+---> 
+---> 
+*/
+
+/* ______________________________________Libraries______________________________________ */
+#include <Arduino.h>
+/* _______________________________________Macros________________________________________ */
+/* _____________________________Declarations_and_Variables______________________________ */
+/* ______________________________________Functions______________________________________ */
+/* ________________________________________Setup________________________________________ */
+void setup() {
+  // put your setup code here, to run once:
+}
+/* ________________________________________Loop_________________________________________ */
+void loop() {
+  // put your main code here, to run repeatedly:
+}
+```
 ## WIFI_RFID_NTP_ESP32
 Shows RFID Tag, Date, Day and Time
 
