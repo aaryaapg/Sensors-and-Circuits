@@ -1,3 +1,5 @@
+//Getting MAC address of ESP32. No need to connect to WiFi for this, just include the WiFi library.
+
 /* ______________________________________Libraries______________________________________ */
 #include <Arduino.h>
 //Wifi
