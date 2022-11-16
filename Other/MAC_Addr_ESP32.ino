@@ -28,7 +28,7 @@ void setup()
   Serial.print("Connected to "); Serial.println(ssid);
   Serial.print("IP address: "); Serial.println(WiFi.localIP());
   //Getting MAC Address of ESP32
-  WiFi.mode(WIFI_MODE_STA);
+  WiFi.mode(WIFI_MODE_STA); //the ESP32 connects to an access point, which is the router
   Serial.print("MAC address: "); Serial.println(WiFi.macAddress());
 }
 /* ________________________________________Loop_________________________________________ */
