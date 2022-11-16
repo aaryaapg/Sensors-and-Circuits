@@ -1,4 +1,9 @@
 /*
+Important: 
+The digital output from DHT11 is not in compliance with the common serial data protocols, such as UART, SPI, or I2C. 
+Instead, DHT-11 operates over a one-wire protocol that communicates sensor data digitally. 
+
+Connections:
 DHT11   Arduino Uno
 VCC ---> 5V
 Data --> 4
