@@ -14,8 +14,8 @@
 
 /* ______________________________________Macros______________________________________ */
 //Wifi
-const char* ssid     = "Padhyegurjar";
-const char* password = "mncb8tbbt8";
+const char* ssid     = "ssid";
+const char* password = "pw";
 
 /* ______________________________________Declarations and Variables______________________________________ */
 //NTP
