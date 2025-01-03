@@ -12,8 +12,8 @@
 //For Firebase & WiFi Connectivity
 #define FIREBASE_HOST "location-database-25b6d-default-rtdb.firebaseio.com"  
 #define FIREBASE_AUTH "XQSMRqCWI3uetqyC4WMgtq08a0VKYZmZ60MVFiI6"  
-#define WIFI_SSID "Padhyegurjar"
-#define WIFI_PASSWORD "mncb8tbbt8"
+#define WIFI_SSID "ssid"
+#define WIFI_PASSWORD "pw"
 #define AXpin D3//Red
 #define AYpin D4//Red
 #define BXpin D5//Green

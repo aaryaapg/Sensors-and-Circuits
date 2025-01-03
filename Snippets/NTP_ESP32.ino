@@ -10,8 +10,8 @@
 #include <WiFiUdp.h>
 /* _______________________________________Macros________________________________________ */
 //Wifi
-const char* ssid     = "Padhyegurjar";
-const char* password = "mncb8tbbt8";
+const char* ssid     = "ssid";
+const char* password = "pw";
 /* _____________________________Declarations_and_Variables______________________________ */
 //Timestamp
 WiFiUDP ntpUDP;

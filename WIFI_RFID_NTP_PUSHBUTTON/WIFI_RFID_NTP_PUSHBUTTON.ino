@@ -31,8 +31,8 @@ Pushbutton -> 22
 #define SS_PIN 15
 #define RST_PIN 27
 //Wifi
-const char* ssid     = "Padhyegurjar";
-const char* password = "mncb8tbbt8";
+const char* ssid     = "ssid";
+const char* password = "pw";
 //Button
 #define buttonPin 22
 /* ______________________________________Declarations and Variables______________________________________ */
